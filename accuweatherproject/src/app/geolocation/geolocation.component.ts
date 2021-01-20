@@ -24,7 +24,6 @@ export class GeolocationComponent implements OnInit {
         .getAPIWeather(this.geoLocation.city, this.geoLocation.country)
         .subscribe((data: any) => {
           this.weather = data['data'][0];
-          console.log(this.weather);
         });
     });
   }

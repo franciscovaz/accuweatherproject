@@ -8,22 +8,32 @@ import { WeatherService } from 'src/app/weather.service';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+  geoLocation: any;
+  weather: any;
+  city:any;
+  country: any;
+  temp: any;
+  ob_time: any;
 
   constructor(
     private _weather: WeatherService,
     private _geoLocation: LocationService
   ) { }
 
-  ngOnInit(): void { 
-    this._geoLocation.getCity().subscribe((data:any) => (
-      this.geoLocation = data;
-      this._weather
-        .getWeather(this.geoLocation.city, this.geoLocation.country)
-        .subscribe((data:any) => {
-          this.weather = data['data'][0];
-          console.log(this.weather.)
+  ngOnInit(): void {
+    this._geoLocation.getAPICity().subscribe(response => {
+      this.geoLocation = response;
 
-        });
+      this.city = this.geoLocation.city;
+      this.country = this.geoLocation.country;
+      this._weather.getAPIWeather(this.geoLocation.city, this.geoLocation.country).subscribe((resp: any) => {
+        this.weather = resp.data[0];
+        this.temp = this.weather.temp;
+        this.ob_time = this.weather.ob_time;
+      })
+    });
 
-       });
+
+  }
+}
 
