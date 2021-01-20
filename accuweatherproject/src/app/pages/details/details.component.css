@@ -1,0 +1,11 @@
+.left{
+    width:auto
+  }
+  .detail-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding:10px;
+    border-top: 1px solid whitesmoke;
+  }
